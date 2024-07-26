@@ -16,9 +16,9 @@ struct ContentView: View {
     @State private var runDuration: String = ""
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Run.timestamp, ascending: false)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var runs: FetchedResults<Run>
 
     var body: some View {
 //        NavigationView {
@@ -69,20 +69,28 @@ struct ContentView: View {
                     .border(.secondary)
             }
             .padding([.leading, .trailing, .bottom])
-            
+            List {
+                ForEach(runs) { run in
+                    Text("Run at \(run.timestamp!, formatter: itemFormatter) for duration \(run.runDuration)")
+                }
+                .onDelete(perform: deleteItems)
+            }
             
             Spacer()
             Button("Add Run") {
-                
+                addItem()
             }
         }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
+            let newRun = Run(context: viewContext)
+            newRun.timestamp = Date()
+            newRun.runDuration = Int64(distanceRan) ?? 0
+            newRun.averageIncline = NSDecimalNumber(string: averageIncline)
+            newRun.distanceRan = NSDecimalNumber(string: runDuration)
+            
             do {
                 try viewContext.save()
             } catch {
@@ -96,7 +104,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { runs[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
