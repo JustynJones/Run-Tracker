@@ -10,6 +10,10 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var distanceRan: String = ""
+    @State private var averageIncline: String = ""
+    @State private var runDuration: String = ""
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -17,28 +21,60 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+//        NavigationView {
+//            List {
+//                ForEach(items) { item in
+//                    NavigationLink {
+//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//                    } label: {
+//                        Text(item.timestamp!, formatter: itemFormatter)
+//                    }
+//                }
+//                .onDelete(perform: deleteItems)
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
+//            }
+//            Text("Select an item")
+//        }
+        VStack {
+            HStack {
+                Text("Distance Ran: ")
+                Spacer()
+                TextField("", text: $distanceRan)
+                    .padding([.leading, .trailing], 5)
+                    .border(.secondary)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            .padding([.leading, .trailing, .bottom])
+            HStack {
+                Text("Average Incline:")
+                Spacer()
+                TextField("", text: $averageIncline)
+                    .padding([.leading, .trailing], 5)
+                    .border(.secondary)
             }
-            Text("Select an item")
+            .padding([.leading, .trailing, .bottom])
+            HStack {
+                Text("Run Duration:")
+                Spacer()
+                TextField("", text: $runDuration)
+                    .padding([.leading, .trailing], 5)
+                    .border(.secondary)
+            }
+            .padding([.leading, .trailing, .bottom])
+            
+            
+            Spacer()
+            Button("Add Run") {
+                
+            }
         }
     }
 
