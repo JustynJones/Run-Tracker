@@ -21,64 +21,47 @@ struct ContentView: View {
     private var runs: FetchedResults<Run>
 
     var body: some View {
-//        NavigationView {
-//            List {
-//                ForEach(items) { item in
-//                    NavigationLink {
-//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-//                    } label: {
-//                        Text(item.timestamp!, formatter: itemFormatter)
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    EditButton()
-//                }
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
-//            }
-//            Text("Select an item")
-//        }
-        VStack {
-            HStack {
-                Text("Distance Ran: ")
-                Spacer()
-                TextField("", text: $distanceRan)
-                    .padding([.leading, .trailing], 5)
-                    .border(.secondary)
-            }
-            .padding([.leading, .trailing, .bottom])
-            HStack {
-                Text("Average Incline:")
-                Spacer()
-                TextField("", text: $averageIncline)
-                    .padding([.leading, .trailing], 5)
-                    .border(.secondary)
-            }
-            .padding([.leading, .trailing, .bottom])
-            HStack {
-                Text("Run Duration:")
-                Spacer()
-                TextField("", text: $runDuration)
-                    .padding([.leading, .trailing], 5)
-                    .border(.secondary)
-            }
-            .padding([.leading, .trailing, .bottom])
-            List {
-                ForEach(runs) { run in
-                    Text("Run at \(run.timestamp!, formatter: itemFormatter) for duration \(run.runDuration)")
+        NavigationStack {
+            VStack {
+                HStack {
+                    Text("Distance Ran: ")
+                    Spacer()
+                    TextField("", text: $distanceRan)
+                        .padding([.leading, .trailing], 5)
+                        .border(.secondary)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            
-            Spacer()
-            Button("Add Run") {
-                addItem()
+                .padding()
+                HStack {
+                    Text("Average Incline:")
+                    Spacer()
+                    TextField("", text: $averageIncline)
+                        .padding([.leading, .trailing], 5)
+                        .border(.secondary)
+                }
+                .padding([.leading, .trailing, .bottom])
+                HStack {
+                    Text("Run Duration:")
+                    Spacer()
+                    TextField("", text: $runDuration)
+                        .padding([.leading, .trailing], 5)
+                        .border(.secondary)
+                }
+                .padding([.leading, .trailing, .bottom])
+                
+                Button("Add Run") {
+                    addItem()
+                }
+                List {
+                    ForEach(runs) { run in
+                        NavigationLink {
+                            RunDetailView(run: run)
+                        } label: {
+                            Text("Run at \(run.timestamp!, formatter: timeStampFormatter) for duration \(run.runDuration)")
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
+                .padding([.bottom])
             }
         }
     }
@@ -117,13 +100,6 @@ struct ContentView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 #Preview {
     ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

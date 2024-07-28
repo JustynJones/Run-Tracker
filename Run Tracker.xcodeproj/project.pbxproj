@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2E10EA82C561D6A00A80E5C /* RunDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E10EA72C561D6A00A80E5C /* RunDetailView.swift */; };
+		F2E10EAA2C56D99000A80E5C /* TextFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E10EA92C56D99000A80E5C /* TextFormatters.swift */; };
 		F2EFCE2E2C53123400C89A07 /* Run_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCE2D2C53123400C89A07 /* Run_TrackerApp.swift */; };
 		F2EFCE302C53123400C89A07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCE2F2C53123400C89A07 /* ContentView.swift */; };
 		F2EFCE322C53123900C89A07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2EFCE312C53123900C89A07 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2E10EA72C561D6A00A80E5C /* RunDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailView.swift; sourceTree = "<group>"; };
+		F2E10EA92C56D99000A80E5C /* TextFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormatters.swift; sourceTree = "<group>"; };
 		F2EFCE2A2C53123400C89A07 /* Run Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Run Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EFCE2D2C53123400C89A07 /* Run_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run_TrackerApp.swift; sourceTree = "<group>"; };
 		F2EFCE2F2C53123400C89A07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +79,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F2E10EA52C561CED00A80E5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F2EFCE2F2C53123400C89A07 /* ContentView.swift */,
+				F2E10EA72C561D6A00A80E5C /* RunDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F2E10EA62C561D2A00A80E5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2EFCE362C53123900C89A07 /* Persistence.swift */,
+				F2EFCE382C53123900C89A07 /* Run_Tracker.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2E10EAB2C56D99500A80E5C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F2E10EA92C56D99000A80E5C /* TextFormatters.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F2EFCE212C53123400C89A07 = {
 			isa = PBXGroup;
 			children = (
@@ -98,12 +128,12 @@
 		F2EFCE2C2C53123400C89A07 /* Run Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				F2EFCE2D2C53123400C89A07 /* Run_TrackerApp.swift */,
-				F2EFCE2F2C53123400C89A07 /* ContentView.swift */,
 				F2EFCE312C53123900C89A07 /* Assets.xcassets */,
-				F2EFCE362C53123900C89A07 /* Persistence.swift */,
-				F2EFCE382C53123900C89A07 /* Run_Tracker.xcdatamodeld */,
+				F2E10EAB2C56D99500A80E5C /* Helpers */,
+				F2E10EA62C561D2A00A80E5C /* Model */,
 				F2EFCE332C53123900C89A07 /* Preview Content */,
+				F2EFCE2D2C53123400C89A07 /* Run_TrackerApp.swift */,
+				F2E10EA52C561CED00A80E5C /* Views */,
 			);
 			path = "Run Tracker";
 			sourceTree = "<group>";
@@ -265,8 +295,10 @@
 			files = (
 				F2EFCE3A2C53123900C89A07 /* Run_Tracker.xcdatamodeld in Sources */,
 				F2EFCE372C53123900C89A07 /* Persistence.swift in Sources */,
+				F2E10EA82C561D6A00A80E5C /* RunDetailView.swift in Sources */,
 				F2EFCE302C53123400C89A07 /* ContentView.swift in Sources */,
 				F2EFCE2E2C53123400C89A07 /* Run_TrackerApp.swift in Sources */,
+				F2E10EAA2C56D99000A80E5C /* TextFormatters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
